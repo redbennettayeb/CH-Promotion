@@ -74,6 +74,37 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // ---------- Contact form (AJAX submit to Formspree) ----------
+  const contactForm = document.getElementById('contact-form');
+  const contactSuccess = document.getElementById('contact-success');
+  const contactError = document.getElementById('contact-error');
+  if (contactForm && contactSuccess && contactError) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi…';
+      contactError.hidden = true;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' }
+        });
+        if (!res.ok) throw new Error('submit_failed');
+        contactForm.hidden = true;
+        contactSuccess.hidden = false;
+        contactSuccess.classList.add('is-visible');
+        contactSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch {
+        contactError.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  }
+
   // ---------- Smooth scroll offset for fixed header ----------
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {

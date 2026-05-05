@@ -231,7 +231,7 @@
         </ul>
       </div>
 
-      <form class="contact__form reveal" action="https://formspree.io/f/mjglrkra" method="POST" novalidate>
+      <form id="contact-form" class="contact__form reveal" action="https://formspree.io/f/mjglrkra" method="POST" novalidate>
         <div class="field">
           <label for="name">Nom complet</label>
           <input type="text" id="name" name="name" required autocomplete="name" />
@@ -258,8 +258,14 @@
           <textarea id="message" name="message" rows="4" required></textarea>
         </div>
         <button type="submit" class="btn btn--primary btn--block">Envoyer le message</button>
+        <p id="contact-error" class="form__feedback" hidden>Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.</p>
         <p class="form__note">Vos données restent confidentielles et ne sont utilisées qu'à des fins de réponse.</p>
       </form>
+
+      <div id="contact-success" class="contact__form contact__success reveal" hidden>
+        <h3>Merci !</h3>
+        <p>Votre message a bien été envoyé.<br>Notre équipe vous recontactera sous 24 heures.</p>
+      </div>
     </div>
   </section>
 
