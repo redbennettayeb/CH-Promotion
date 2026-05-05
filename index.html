@@ -261,11 +261,6 @@
         <p id="contact-error" class="form__feedback" hidden>Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.</p>
         <p class="form__note">Vos données restent confidentielles et ne sont utilisées qu'à des fins de réponse.</p>
       </form>
-
-      <div id="contact-success" class="contact__form contact__success reveal" hidden>
-        <h3>Merci !</h3>
-        <p>Votre message a bien été envoyé.<br>Notre équipe vous recontactera sous 24 heures.</p>
-      </div>
     </div>
   </section>
 
@@ -298,6 +293,20 @@
       <p class="footer__credit">L'Architecture du Privilège</p>
     </div>
   </footer>
+
+  <!-- SUCCESS MODAL -->
+  <div id="contact-success" class="modal" role="dialog" aria-modal="true" aria-labelledby="success-title" aria-hidden="true">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__panel" role="document">
+      <button type="button" class="modal__close" aria-label="Fermer" data-modal-close>&times;</button>
+      <div class="modal__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h3 id="success-title" class="modal__title">Merci !</h3>
+      <p class="modal__text">Votre message a bien été envoyé.<br>Notre équipe vous recontactera sous 24 heures.</p>
+      <button type="button" class="btn btn--primary modal__cta" data-modal-close>Fermer</button>
+    </div>
+  </div>
 
   <script src="script.js" defer></script>
 </body>

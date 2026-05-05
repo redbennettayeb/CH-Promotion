@@ -78,6 +78,27 @@
   const contactForm = document.getElementById('contact-form');
   const contactSuccess = document.getElementById('contact-success');
   const contactError = document.getElementById('contact-error');
+
+  const openModal = () => {
+    contactSuccess.classList.add('is-open');
+    contactSuccess.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeModal = () => {
+    contactSuccess.classList.remove('is-open');
+    contactSuccess.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  if (contactSuccess) {
+    contactSuccess.querySelectorAll('[data-modal-close]').forEach(el => {
+      el.addEventListener('click', closeModal);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && contactSuccess.classList.contains('is-open')) closeModal();
+    });
+  }
+
   if (contactForm && contactSuccess && contactError) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -93,12 +114,11 @@
           headers: { Accept: 'application/json' }
         });
         if (!res.ok) throw new Error('submit_failed');
-        contactForm.hidden = true;
-        contactSuccess.hidden = false;
-        contactSuccess.classList.add('is-visible');
-        contactSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        contactForm.reset();
+        openModal();
       } catch {
         contactError.hidden = false;
+      } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
       }
